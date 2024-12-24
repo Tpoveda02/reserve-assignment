@@ -1,25 +1,29 @@
 package org.example.model;
 
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.HashMap;
+
 public class Room {
-    private String type;
+    private RoomType type;
     private double price;
     private String features;
-    private int quantityAvailable;
+    private Map<LocalDate, Boolean> availability;
 
     // Constructor
-    public Room(String type, double price, String features, int quantityAvailable) {
+    public Room(RoomType type, double price, String features) {
         this.type = type;
         this.price = price;
         this.features = features;
-        this.quantityAvailable = quantityAvailable;
+        this.availability = new HashMap<>();
     }
-    //Getters and Setters
 
-    public String getType() {
+    // Getters y Setters
+    public RoomType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(RoomType type) {
         this.type = type;
     }
 
@@ -39,11 +43,12 @@ public class Room {
         this.features = features;
     }
 
-    public int getQuantityAvailable() {
-        return quantityAvailable;
+    public Map<LocalDate, Boolean> getAvailability() {
+        return availability;
     }
 
-    public void setQuantityAvailable(int quantityAvailable) {
-        this.quantityAvailable = quantityAvailable;
+    public void setAvailability(Map<LocalDate, Boolean> availability) {
+        this.availability = availability;
     }
+
 }
