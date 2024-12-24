@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Accommodation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Accommodation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +37,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2qgFvjfv3QEbNRGl3hefeWq5w0v" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
