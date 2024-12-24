@@ -1,4 +1,4 @@
 package org.example.view;
 
-public class RoomView {
+public class GeneralView {
 }
