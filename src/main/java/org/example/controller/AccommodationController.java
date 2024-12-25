@@ -1,9 +1,12 @@
 package org.example.controller;
 
 import org.example.model.Accommodation;
+import org.example.model.Room;
 import org.example.view.GeneralView;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccommodationController {
@@ -20,7 +23,16 @@ public class AccommodationController {
     }
 
     public List<Accommodation> searchAccommodations(String city, String accommodationType, LocalDate startDate, LocalDate endDate, int adults, int children, int rooms) {
-        return null;
+        List<Accommodation> resultsAccomodations = new ArrayList<>();
+        for (Accommodation accommodation : accommodations) {
+            if (accommodation.getCity().equalsIgnoreCase(city) && accommodation.getClass().getSimpleName().equalsIgnoreCase(accommodationType)) {
+                List<Room> availableRoomsByAccomodation = accommodation.findRoomsByDates(accommodation.getRooms(), startDate, endDate);
+                if (!availableRoomsByAccomodation.isEmpty()) {
+                    accommodation.setRooms(availableRoomsByAccomodation);
+                    resultsAccomodations.add(accommodation);
+                }
+            }
+        }
+        return resultsAccomodations;
     }
-
 }

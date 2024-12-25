@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,4 +21,5 @@ public class Hotel extends Accommodation {
         // Implementa la lógica de cálculo de precio total aquí.
         return 0;
     }
+
 }
