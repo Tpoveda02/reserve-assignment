@@ -16,7 +16,7 @@ public class GeneralView {
         this.accommodationController = accommodationController;
     }
 
-    public void searchAndDisplayAccommodations() {
+    public void searchAndShowAccommodations() {
         Scanner scanner = new Scanner(System.in);
 
         // Solicitar los parámetros al usuario
@@ -43,7 +43,26 @@ public class GeneralView {
 
         // Realizar la búsqueda a través del controlador
         List<Accommodation> foundAccommodations = accommodationController.searchAccommodations(city, accommodationType, startDate, endDate, adults, children, rooms);
+        // Mostrar los resultados
+        showAccommodations(foundAccommodations, startDate, endDate);
+    }
 
+    public void showAccommodations(List<Accommodation> accommodations, LocalDate startDate, LocalDate endDate) {
+        System.out.println("Alojamientos Disponibles:");
+        for (Accommodation accommodation : accommodations) {
+            System.out.println("Nombre: " + accommodation.getName());
+            System.out.println("Ciudad: " + accommodation.getCity());
+            System.out.println("Calificación: " + accommodation.getRating());
+            System.out.println("Precio por Noche: " + accommodation.getPricePerNight());
+            System.out.println("Precio Calculado: " + accommodation.calculateTotalPrice(startDate, endDate, accommodation.getRooms()));
+            System.out.println("Habitaciones: ");
+            for (Room room : accommodation.getRooms()) {
+                System.out.println("  Tipo: " + room.getType().getName());
+                System.out.println("  Precio: " + room.getPrice());
+                System.out.println("  Características: " + room.getType());
+            }
+            System.out.println("----------------------------");
+        }
     }
 
 
