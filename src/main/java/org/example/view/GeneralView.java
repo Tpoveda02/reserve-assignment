@@ -58,8 +58,8 @@ public class GeneralView {
             System.out.println("Habitaciones: ");
             for (Room room : accommodation.getRooms()) {
                 System.out.println("  Tipo: " + room.getType().getName());
-                System.out.println("  Precio: " + room.getPrice());
-                System.out.println("  Características: " + room.getType());
+                System.out.println("  Precio: " + room.getType().getPrice());
+                System.out.println("  Características: " + room.getType().getFeatures());
             }
             System.out.println("----------------------------");
         }
