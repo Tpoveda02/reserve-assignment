@@ -85,4 +85,7 @@ public abstract class Accommodation {
             return 0.0; // Sin ajuste
         }
     }
+
+    public void addBooking(Booking newBooking) {
+    }
 }
