@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 @Getter
 @Setter
@@ -18,6 +19,6 @@ public class Client {
     private String email;
     private String nationality;
     private String phoneNumber;
-    private LocalTime birthdate;
+    private LocalDate birthdate;
 
 }

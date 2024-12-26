@@ -20,7 +20,6 @@ public class Hotel extends Accommodation {
     public List<Room> checkAvailableRooms(List<Room> availableRoomsByDate, int adults, int children, int rooms) {
         int totalPeople = adults + children;
         if (rooms > 1) {
-            System.out.println( "total" + totalPeople);
             return checkMultipleRoomsCapacity(availableRoomsByDate, totalPeople, rooms);
         } else {
             List<Room> availableRoomsByCapacity = new ArrayList<>();
@@ -35,7 +34,6 @@ public class Hotel extends Accommodation {
             if (room.getType().getPeopleByCountBeds() >= totalPeople/rooms) {
                 rooms--;
                 totalPeople -= room.getType().getPeopleByCountBeds();
-                System.out.println(rooms + "total" + totalPeople);
                 selectedRooms.add(room);
                 if (rooms == 0) {
                     return selectedRooms;

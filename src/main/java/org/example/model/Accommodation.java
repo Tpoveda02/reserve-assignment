@@ -87,5 +87,20 @@ public abstract class Accommodation {
         }
     }
 
-    public void addBooking(Booking booking) { this.bookings.add(booking); }
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
+
+    public boolean removeRoomById(String roomId) {
+        return rooms.removeIf(room -> room.getId().equals(roomId));
+    }
+
+    public Booking findBookingByEmail(String email, List<Booking> bookings) {
+        for (Booking booking : bookings) {
+            if (booking.getClient().getEmail().equals(email)) {
+                return booking;
+            }
+        }
+        return null;
+    }
 }

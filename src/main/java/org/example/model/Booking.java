@@ -19,8 +19,10 @@ public class Booking {
     private String accommodationId;
     private LocalDate startDate;
     private LocalDate endDate;
+    private int numPersonsEntered;
+    private int numRooms;
 
-    public Booking generateBook(String id, Client clientBooking, String arrivalTime, Accommodation accommodation, LocalDate startDate, LocalDate endDate) {
+    public Booking generateBook(String id, Client clientBooking, String arrivalTime, Accommodation accommodation, LocalDate startDate, LocalDate endDate, int numPersonsEntered, int numRooms) {
         // Disminuir la cantidad de habitaciones disponibles
         List<Room> rooms = accommodation.getRooms();
         for (Room room : rooms) {
@@ -30,7 +32,9 @@ public class Booking {
             }
         }
         // Crear registro de reserva
-        Booking booking = new Booking(id,clientBooking, arrivalTime, accommodation.getId(), startDate, endDate);
+        Booking booking = new Booking(id, clientBooking, arrivalTime, accommodation.getId(), startDate, endDate, numPersonsEntered, numRooms);
         return booking;
     }
+
+
 }
