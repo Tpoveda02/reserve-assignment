@@ -12,8 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Hotel extends Accommodation {
 
-    public Hotel(String id, String name, String city, double rating, double pricePartial, double priceTotal, double discount, List<Room> rooms) {
-        super(id, name, city, rating, pricePartial, priceTotal, discount, rooms);
+    public Hotel(String id, String name, String city, double rating, double pricePartial, double priceTotal, double discount, List<Room> rooms, List<Booking> bookings) {
+        super(id, name, city, rating, pricePartial, priceTotal, discount, rooms, bookings);
     }
 
     @Override

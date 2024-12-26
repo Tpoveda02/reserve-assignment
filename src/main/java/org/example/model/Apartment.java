@@ -16,10 +16,9 @@ public class Apartment extends Accommodation {
     private int numberOfRooms;
 
     //Constructor
-    public Apartment(String id, String name, String city, double rating, double pricePartial, double priceTotal, double discount, List<Room> rooms) {
-        super(id, name, city, rating, pricePartial, priceTotal, discount, rooms);
+    public Apartment(String id, String name, String city, double rating, double pricePartial, double priceTotal, double discount, List<Room> rooms, List<Booking> bookings) {
+        super(id, name, city, rating, pricePartial, priceTotal, discount, rooms, bookings);
     }
-
 
     @Override
     public List<Room> checkAvailableRooms(List<Room> availableRoomsByDate, int adults, int children, int rooms) {
