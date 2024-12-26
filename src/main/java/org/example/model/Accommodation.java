@@ -89,6 +89,7 @@ public abstract class Accommodation {
 
     public void addBooking(Booking booking) {
         this.bookings.add(booking);
+
     }
 
     public boolean removeRoomById(String roomId) {

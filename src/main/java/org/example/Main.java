@@ -1,10 +1,8 @@
 package org.example;
 
 import org.example.controller.AccommodationController;
-import org.example.model.Accommodation;
-import org.example.model.Hotel;
-import org.example.model.Room;
-import org.example.model.RoomType;
+import org.example.controller.BookingController;
+import org.example.model.*;
 import org.example.view.GeneralView;
 
 import java.time.LocalDate;
@@ -49,11 +47,11 @@ public class Main {
 
         // Creación de hoteles
         List<Accommodation> accommodations = new ArrayList<>();
-        accommodations.add(new Hotel("A1", "Hotel Caribe", "Cartagena", 4.5, 300.0,0,0, rooms1,null));
-        accommodations.add(new Hotel("A2", "Hotel Andino", "Bogotá", 4.0, 250.0,0,0, rooms2,null));
-        accommodations.add(new Hotel("A3", "Hotel Pacífico", "Buenaventura", 4.2, 280.0,0,0, rooms3,null));
-        accommodations.add(new Hotel("A4", "Hotel Nevado", "Manizales", 3.8, 230.0,0,0, rooms4,null));
-        accommodations.add(new Hotel("A5", "Hotel Llanero", "Villavicencio", 4.3, 290.0,0,0, rooms5,null));
+        accommodations.add(new Hotel("A1", "Hotel Caribe", "Cartagena", 4.5, 300.0,0,0, rooms1,new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A2", "Hotel Andino", "Bogotá", 4.0, 250.0,0,0, rooms2,new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A3", "Hotel Pacífico", "Buenaventura", 4.2, 280.0,0,0, rooms3,new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A4", "Hotel Nevado", "Manizales", 3.8, 230.0,0,0, rooms4,new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A5", "Hotel Llanero", "Villavicencio", 4.3, 290.0,0,0, rooms5,new ArrayList<Booking>()));
 
         // Impresión para verificar
         accommodations.forEach(accommodation -> {
@@ -70,9 +68,12 @@ public class Main {
 
         // Crear controlador y vista
         AccommodationController accommodationController = new AccommodationController(accommodations);
-        GeneralView generalView = new GeneralView(accommodationController);
+        BookingController bookingController = new BookingController(accommodations);
+        GeneralView generalView = new GeneralView(accommodationController,bookingController);
 
         // Ejecutar la comprobación de disponibilidad
         generalView.searchAndShowAccommodations();
+        generalView.makeReservation(accommodations);
+        generalView.updateReservation(accommodations);
     }
 }

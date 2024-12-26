@@ -31,6 +31,7 @@ public class Booking {
                 room.getAvailability().put(endDate, false);
             }
         }
+        accommodation.setRooms(rooms);
         // Crear registro de reserva
         Booking booking = new Booking(id, clientBooking, arrivalTime, accommodation.getId(), startDate, endDate, numPersonsEntered, numRooms);
         return booking;
