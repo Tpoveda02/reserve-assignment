@@ -15,7 +15,7 @@ public class Booking {
     private String id;
     private Client client;
     private String arrivalTime;
-    private String hotelId;
+    private String accommodationId;
     private LocalDate startDate;
     private LocalDate endDate;
 
