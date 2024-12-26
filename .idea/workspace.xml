@@ -6,21 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="61f02d6a-a87c-4de7-a087-98af660f761a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/AccommodationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/AccommodationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/RoomController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Accommodation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Accommodation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Apartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Apartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/DayPass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/DayPass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Farmhouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Farmhouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Hotel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/RoomType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/RoomType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/controller/AccommodationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controller/AccommodationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controller/RoomController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/Accommodation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/Accommodation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/Apartment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/Apartment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/DayPass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/DayPass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/Farmhouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/Farmhouse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/Hotel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/Hotel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/RoomType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/RoomType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/view/GeneralView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/view/GeneralView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

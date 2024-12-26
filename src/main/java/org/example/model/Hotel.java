@@ -21,5 +21,30 @@ public class Hotel extends Accommodation {
         // Implementa la lógica de cálculo de precio total aquí.
         return 0;
     }
+    @Override
+    public List<Room> checkAvailableRooms(List<Room> availableRoomsByDate, int adults, int children, int rooms) {
+        int totalPeople = adults + children;
+        if (rooms > 1) {
+            return checkMultipleRoomsCapacity(availableRoomsByDate, totalPeople, rooms);
+        } else {
+            List<Room> availableRoomsByCapacity = new ArrayList<>();
+            availableRoomsByCapacity.add(checkSingleRoomCapacity(availableRoomsByDate, totalPeople));
+            return availableRoomsByCapacity;
+        }
+    }
 
+    private List<Room> checkMultipleRoomsCapacity(List<Room> availableRooms, int totalPeople, int rooms) {
+        List<Room> selectedRooms = new ArrayList<>();
+        for (Room room : availableRooms) {
+            if (room.getType().getPeopleByCountBeds() >= totalPeople) {
+                rooms--;
+                totalPeople -= room.getType().getPeopleByCountBeds();
+                selectedRooms.add(room);
+                if (rooms == 0) {
+                    return selectedRooms;
+                }
+            }
+        }
+        return selectedRooms;
+    }
 }

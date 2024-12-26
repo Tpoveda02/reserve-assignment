@@ -26,7 +26,8 @@ public class AccommodationController {
         List<Accommodation> resultsAccomodations = new ArrayList<>();
         for (Accommodation accommodation : accommodations) {
             if (accommodation.getCity().equalsIgnoreCase(city) && accommodation.getClass().getSimpleName().equalsIgnoreCase(accommodationType)) {
-                List<Room> availableRoomsByAccomodation = accommodation.findRoomsByDates(accommodation.getRooms(), startDate, endDate);
+                List<Room> availableRoomsByAccomodation = accommodation.checkAvailableRooms(
+                        accommodation.findRoomsByDates(accommodation.getRooms(), startDate, endDate), adults, children, rooms);
                 if (!availableRoomsByAccomodation.isEmpty()) {
                     accommodation.setRooms(availableRoomsByAccomodation);
                     resultsAccomodations.add(accommodation);

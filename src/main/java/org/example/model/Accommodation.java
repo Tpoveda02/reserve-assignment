@@ -22,7 +22,7 @@ public abstract class Accommodation {
     private List<Room> rooms;
 
     public abstract double calculateTotalPrice(LocalDate startDate, LocalDate endDate, List<Room> rooms);
-
+    public abstract List<Room> checkAvailableRooms(List<Room> availableRoomsByDate, int adults, int children, int rooms);
     public List<Room> findRoomsByDates(List<Room> availableRooms, LocalDate startDate, LocalDate endDate) {
         List<Room> tempAvailableRooms = new ArrayList<>();
         for (Room room : availableRooms) {
@@ -32,5 +32,15 @@ public abstract class Accommodation {
         }
         availableRooms.addAll(tempAvailableRooms);
         return availableRooms;
+    }
+
+
+    public Room checkSingleRoomCapacity(List<Room> availableRooms, int totalPeople) {
+        for (Room room : availableRooms) {
+            if (room.getType().getPeopleByCountBeds() >= totalPeople) {
+                return room;
+            }
+        }
+        return null;
     }
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
@@ -22,5 +23,13 @@ public class Farmhouse extends Accommodation{
     @Override
     public double calculateTotalPrice(LocalDate startDate, LocalDate endDate, List<Room> rooms) {
         return 0;
+    }
+
+    @Override
+    public List<Room> checkAvailableRooms(List<Room> availableRoomsByDate, int adults, int children, int rooms) {
+        int totalPeople = adults + children;
+        List<Room> availableRoomsByCapacity = new ArrayList<>();
+        availableRoomsByCapacity.add(checkSingleRoomCapacity(availableRoomsByDate, totalPeople));
+        return availableRoomsByCapacity;
     }
 }
