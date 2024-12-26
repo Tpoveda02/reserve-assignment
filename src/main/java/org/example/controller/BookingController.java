@@ -16,7 +16,7 @@ public class BookingController {
     public BookingController(List<Accommodation> accommodations) {
         this.accommodations = accommodations;
     }
-    public String book(String id, String firstName, String lastName, String email, String nationality,
+    public Accommodation book(String id, String firstName, String lastName, String email, String nationality,
                        String phoneNumber, LocalDate birthdate, String arrivalTime, Accommodation accommodation,
                        LocalDate startDate, LocalDate endDate, int numPersonsEntered, int rooms) {
         Client clientBooking = new Client("C1", firstName, lastName, email, nationality, phoneNumber, birthdate);
@@ -26,7 +26,8 @@ public class BookingController {
 
         // Añadir la reserva al alojamiento
         accommodation.addBooking(newBooking);
-        return "Se ha realizado la reserva con éxito";
+
+        return accommodation;
     }
 
 

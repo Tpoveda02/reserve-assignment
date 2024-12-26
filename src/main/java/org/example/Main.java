@@ -73,7 +73,7 @@ public class Main {
 
         // Ejecutar la comprobación de disponibilidad
         generalView.searchAndShowAccommodations();
-        generalView.makeReservation(accommodations);
-        generalView.updateReservation(accommodations);
+        accommodations = generalView.makeReservation(accommodations);
+        accommodations = generalView.updateReservation(accommodations);
     }
 }

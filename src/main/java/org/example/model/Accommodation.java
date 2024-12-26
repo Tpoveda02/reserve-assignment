@@ -104,4 +104,12 @@ public abstract class Accommodation {
         }
         return null;
     }
+    public Booking updateBooking(Booking updateBooking, List<Booking> bookings) {
+        for (Booking booking : bookings) {
+            if (booking.getAccommodation().getId().equals(updateBooking.getId())) {
+                booking = updateBooking;
+            }
+        }
+        return null;
+    }
 }

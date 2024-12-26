@@ -57,4 +57,16 @@ public class AccommodationController {
         }
         return null;
     }
+
+    public List<Accommodation> updateAccommodation(Accommodation updateAccommodation, List<Accommodation> accommodations) {
+        List<Accommodation> updateAccommodations = new ArrayList<Accommodation>();
+        for (Accommodation accommodation : accommodations) {
+            if (accommodation.getId().equals(updateAccommodation.getId())) {
+                updateAccommodations.add(updateAccommodation);
+            }else{
+                updateAccommodations.add(accommodation);
+            }
+        }
+        return updateAccommodations;
+    }
 }

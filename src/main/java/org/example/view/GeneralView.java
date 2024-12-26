@@ -75,7 +75,7 @@ public class GeneralView {
         }
     }
 
-    public void makeReservation(List<Accommodation> accommodations) {
+    public List<Accommodation> makeReservation(List<Accommodation> accommodations) {
         Scanner scanner = new Scanner(System.in);
         // Solicitar los datos del cliente
         /*
@@ -113,17 +113,16 @@ public class GeneralView {
         // Realizar la reserva a través del controlador
         System.out.println(endDate);
         try {
-            bookingController.book("1BOK", firstName, lastName, email, nationality, phoneNumber,
+            Accommodation updateAccommodation = bookingController.book("1BOK", firstName, lastName, email, nationality, phoneNumber,
                     birthdate, arrivalTime, accommodation, startDate, endDate, adults + children, numRooms);
+            return accommodationController.updateAccommodation(updateAccommodation,accommodations);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("No se pudo realizar la reserva");
+            return accommodations;
         }
-
-        // Mostrar el resultado de la reserva
-
     }
 
-    public void updateReservation(List<Accommodation> accommodations) {
+    public List<Accommodation> updateReservation(List<Accommodation> accommodations) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese su email:");
         String email = scanner.nextLine();
@@ -131,13 +130,17 @@ public class GeneralView {
         LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine());
         Booking booking = bookingController.updateBooking(email, dateOfBirth, accommodations);
         if(booking != null){
-            updateBookingDetails(accommodationController.findAccommodation(booking.getAccommodationId(),accommodations), booking);
+            Accommodation updateAccommodation = accommodationController.findAccommodation(booking.getAccommodation().getId(),accommodations);
+            return updateBookingDetails(updateAccommodation, booking, accommodations);
+
         }else{
             System.out.println("No se encontro ninguna reserva, verifique los datos ingresados");
         }
+        return accommodations;
     }
 
-    private void updateBookingDetails(Accommodation accommodation, Booking booking) {
+    private List<Accommodation> updateBookingDetails(Accommodation accommodation, Booking booking, List<Accommodation> accommodations) {
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Datos de la reserva:");
         System.out.println("Nombre: " + booking.getClient().getFirstName());
@@ -151,27 +154,34 @@ public class GeneralView {
         System.out.println("¿Qué desea cambiar?");
         System.out.println("1. Cambiar habitación");
         System.out.println("2. Cambiar alojamiento");
-        int option = scanner.nextInt();
-        if (option == 1) {
-            // Cambiar de habitación
-            changeRoom(accommodation, booking);
-        } else if (option == 2) {
-            // Cambiar de alojamiento
-            accommodation.getBookings().remove(booking);
-            // Eliminar la reserva actual
-            System.out.println( "Reserva eliminada. Proceda a crear una nueva reserva.");
-        } else {
-            System.out.println( "Opción no válida");
+
+        try {
+            int option = scanner.nextInt();
+            if (option == 1) {
+                // Cambiar de habitación
+                return updateBookingDetails(changeRoom(accommodation, booking), booking, accommodations);
+            } else if (option == 2) {
+                // Cambiar de alojamiento
+                accommodation.getBookings().remove(booking);
+                // Eliminar la reserva actual
+                System.out.println("Reserva eliminada. Proceda a crear una nueva reserva.");
+                return updateBookingDetails(accommodation, booking, accommodations);
+            } else {
+                System.out.println("Opción no válida");
+            }
+        }catch (Exception e){
+            System.out.println("No se pudo realizar la actualización de la reserva");
         }
+        return accommodations;
     }
-    private void changeRoom(Accommodation accommodation, Booking booking) {
+    private Accommodation changeRoom(Accommodation accommodation, Booking booking) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Habitaciones ya reservadas: " + accommodation.getRooms());
-        showRooms(accommodation.getRooms());
+        System.out.println("Habitaciones ya reservadas: ");
+        showRooms(booking.getAccommodation().getRooms());
         System.out.println("----------------------------");
         System.out.println("Ingrese el id de la habitacion que quiere cambiar: ");
         String idRoom = scanner.nextLine();
-        Room room = bookingController.seletedRoom(idRoom, accommodation.getRooms());
+        Room room = bookingController.seletedRoom(idRoom, booking.getAccommodation().getRooms());
         List<Room> roomsAvailables = accommodationController.findAvailableRoomsByAccommodation(
                 accommodation, booking.getStartDate(), booking.getEndDate(),
                 booking.getNumPersonsEntered() - room.getType().getPeopleByCountBeds(), 0, numRooms).getRooms();
@@ -180,11 +190,13 @@ public class GeneralView {
         System.out.println("----------------------------");
         System.out.println("Ingrese el id de la nueva habitacion: ");
         String idNewRoom = scanner.nextLine();
-        Room newRoom = bookingController.seletedRoom(idRoom, accommodation.getRooms());
-        accommodation.removeRoomById(room.getId());
-        accommodation.getRooms().add(newRoom);
+        Room newRoom = bookingController.seletedRoom(idNewRoom, accommodation.getRooms());
+        booking.getAccommodation().removeRoomById(room.getId());
+        booking.getAccommodation().getRooms().add(newRoom);
+        accommodation.updateBooking(booking,accommodation.getBookings());
         System.out.println("----------------------------");
         System.out.println("Reserva actualizada");
+        return accommodation;
     }
 
     private void showRooms (List < Room > rooms) {
