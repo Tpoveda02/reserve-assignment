@@ -31,14 +31,13 @@ public abstract class Accommodation {
 
 
     public List<Room> findRoomsByDates(List<Room> availableRooms, LocalDate startDate, LocalDate endDate) {
-        List<Room> tempAvailableRooms = new ArrayList<>();
+        List<Room> tempAvailableRooms = new ArrayList<Room>();
         for (Room room : availableRooms) {
             if (room.isAvailable(room.getAvailability(), startDate, endDate)) {
                 tempAvailableRooms.add(room);
             }
         }
-        availableRooms.addAll(tempAvailableRooms);
-        return availableRooms;
+        return tempAvailableRooms;
     }
 
     public Room checkSingleRoomCapacity(List<Room> availableRooms, int totalPeople) {

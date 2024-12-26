@@ -11,34 +11,62 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class AccommodationController {
+
     private List<Accommodation> accommodations;
-    private GeneralView generalView;
 
-    public AccommodationController(List<Accommodation> accommodations, GeneralView generalView) {
+    public List<Accommodation> searchAccommodations(List<Accommodation> accommodations, String city, String accommodationType, LocalDate startDate, LocalDate endDate, int adults, int children, int rooms) {
         this.accommodations = accommodations;
-        this.generalView = generalView;
-    }
-
-    public AccommodationController(List<Accommodation> accommodations) {
-        this.accommodations = accommodations;
-    }
-
-    public List<Accommodation> searchAccommodations(String city, String accommodationType, LocalDate startDate, LocalDate endDate, int adults, int children, int rooms) {
-        List<Accommodation> resultsAccomodations = new ArrayList<>();
+        List<Accommodation> resultsAccommodations = new ArrayList<>();
         for (Accommodation accommodation : accommodations) {
             if (accommodation.getCity().equalsIgnoreCase(city) && accommodation.getClass().getSimpleName().equalsIgnoreCase(accommodationType)) {
-                Accommodation newAccommodation = findAvailableRoomsByAccommodation(accommodation,startDate,endDate,adults,children,rooms);
-                if (newAccommodation != null)
-                    resultsAccomodations.add(accommodation);
+                Accommodation newAccommodation = showAvailableRoomsByAccommodation(cloneAccommodation(accommodation).get(0), startDate, endDate, adults, children, rooms);
+                if (newAccommodation != null) {
+                    resultsAccommodations.add(newAccommodation);
+                }
             }
         }
-        return resultsAccomodations;
+        return resultsAccommodations;
     }
-    public Accommodation findAvailableRoomsByAccommodation(Accommodation accommodation, LocalDate startDate, LocalDate endDate, int adults, int children, int rooms){
+
+    private List<Accommodation> cloneAccommodation(Accommodation accommodation) {
+        List<Accommodation> accommodationList = new ArrayList<>();
+        // Aquí necesitarías implementar un método que clone el objeto Accommodation profundamente, incluyendo sus habitaciones.
+        accommodationList.add(accommodation);
+        return accommodationList; // Esto es un pseudocódigo. Necesitarás implementar un clonador real.
+    }
+
+    public Accommodation showAvailableRoomsByAccommodation(Accommodation accommodation, LocalDate startDate, LocalDate endDate, int adults, int children, int rooms) {
+        List<Room> availableRoomsByAccommodation = accommodation.checkAvailableRooms(
+                accommodation.findRoomsByDates(accommodation.getRooms(), startDate, endDate), adults, children, rooms);
+        if (!availableRoomsByAccommodation.isEmpty()) {
+            accommodation.calculateTotalPrice(accommodation.getRooms(), startDate, endDate);
+            System.out.println("Identificador: " + accommodation.getId());
+            System.out.println("Nombre: " + accommodation.getName());
+            System.out.println("Ciudad: " + accommodation.getCity());
+            System.out.println("Calificación: " + accommodation.getRating());
+            System.out.println("Precio total: " + accommodation.getPriceTotal());
+            System.out.println("Precio Descontado/Adicional : " + (accommodation.getPriceTotal() - accommodation.getPricePartial()));
+            System.out.println("Porcentaje Descontado/Adicional: " + accommodation.getDiscount());
+            System.out.println("Habitaciones: ");
+            for (Room room : availableRoomsByAccommodation) {
+                System.out.println("  Identificador: " + room.getId());
+                System.out.println("  Tipo: " + room.getType().getName());
+                System.out.println("  Precio por noche: " + room.getType().getPrice());
+                System.out.println("  Características: " + room.getType().getFeatures());
+                System.out.println("  Disponibilidad: " + room.getAvailability());
+            }
+            System.out.println("----------------------------");
+            return accommodation;
+        }
+        return null;
+    }
+
+    public Accommodation findAvailableRoomsByAccommodation(Accommodation accommodation, LocalDate startDate, LocalDate endDate, int adults, int children, int rooms) {
         List<Room> availableRoomsByAccommodation = accommodation.checkAvailableRooms(
                 accommodation.findRoomsByDates(accommodation.getRooms(), startDate, endDate), adults, children, rooms);
         if (!availableRoomsByAccommodation.isEmpty()) {
@@ -63,7 +91,7 @@ public class AccommodationController {
         for (Accommodation accommodation : accommodations) {
             if (accommodation.getId().equals(updateAccommodation.getId())) {
                 updateAccommodations.add(updateAccommodation);
-            }else{
+            } else {
                 updateAccommodations.add(accommodation);
             }
         }

@@ -9,9 +9,10 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    private static List<Accommodation> accommodations;
+
+    static {
         // Inicializar datos de prueba
-        // Tipos de habitación
         List<RoomType> roomTypes = new ArrayList<>();
         roomTypes.add(new RoomType("RT1", "Habitación Sencilla", Map.of("Aire acondicionado", true, "Televisión", true), 100, 1));
         roomTypes.add(new RoomType("RT2", "Habitación Doble", Map.of("Aire acondicionado", true, "Televisión", true, "Minibar", true), 150, 2));
@@ -45,35 +46,67 @@ public class Main {
             rooms5.add(new Room("R" + (i + 1), roomTypes.get(i % 5), new HashMap<>()));
         }
 
+        accommodations = new ArrayList<>();
+        RoomType roomTypeFarm = new RoomType("FT1", "Finca Grande 3 habitaciones", Map.of("Aire acondicionado", true, "Televisión", true), 100, 6);
+        List<Room> roomF = new ArrayList<>();
+        roomF.add(new Room("FT1", roomTypeFarm, new HashMap<>()));
+        accommodations.add(new Farmhouse("A6", "Finca el Caribe", "Cartagena", 4.5, 900.0, 900.0, 0, roomF, new ArrayList<Booking>()));
+
+        RoomType roomTypeApto = new RoomType("APT1", "Apartamento El Ideal 5 habitaciones", Map.of("Aire acondicionado", true, "Televisión", true), 100, 12);
+        List<Room> roomApt = new ArrayList<>();
+        roomApt.add(new Room("APT1", roomTypeApto, new HashMap<>()));
+        accommodations.add(new Apartment("A7", "Apartamento el Sol", "Villavicencio", 4.5, 1200.0, 1200.0, 0, roomApt, new ArrayList<Booking>()));
+
+        RoomType roomTypeDayPass = new RoomType("DATAPT1", "Entrada estandar", Map.of("Aire acondicionado", true, "Televisión", true), 100, 12);
+        List<Room> roomDP = new ArrayList<>();
+        roomDP.add(new Room("DAYP1", roomTypeDayPass, new HashMap<>()));
+        accommodations.add(new DayPass("A8", "Dia soleado en Rosales", "Villavicencio", 4.5, 1200.0, 1200.0, 0, roomDP, new ArrayList<Booking>()));
+
         // Creación de hoteles
-        List<Accommodation> accommodations = new ArrayList<>();
-        accommodations.add(new Hotel("A1", "Hotel Caribe", "Cartagena", 4.5, 300.0,0,0, rooms1,new ArrayList<Booking>()));
-        accommodations.add(new Hotel("A2", "Hotel Andino", "Bogotá", 4.0, 250.0,0,0, rooms2,new ArrayList<Booking>()));
-        accommodations.add(new Hotel("A3", "Hotel Pacífico", "Buenaventura", 4.2, 280.0,0,0, rooms3,new ArrayList<Booking>()));
-        accommodations.add(new Hotel("A4", "Hotel Nevado", "Manizales", 3.8, 230.0,0,0, rooms4,new ArrayList<Booking>()));
-        accommodations.add(new Hotel("A5", "Hotel Llanero", "Villavicencio", 4.3, 290.0,0,0, rooms5,new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A1", "Hotel Caribe", "Cartagena", 4.5, roomTypes.get(0).getPrice(), 0, 0, rooms1, new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A2", "Hotel Andino", "Bogotá", 4.0, roomTypes.get(0).getPrice(), 0, 0, rooms2, new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A3", "Hotel Pacífico", "Buenaventura", 4.2, roomTypes.get(0).getPrice(), 0, 0, rooms3, new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A4", "Hotel Nevado", "Manizales", 3.8, roomTypes.get(0).getPrice(), 0, 0, rooms4, new ArrayList<Booking>()));
+        accommodations.add(new Hotel("A5", "Hotel Llanero", "Villavicencio", 4.3, roomTypes.get(0).getPrice(), 0, 0, rooms5, new ArrayList<Booking>()));
+    }
 
-        // Impresión para verificar
-        accommodations.forEach(accommodation -> {
-            System.out.println("Accommodation: " + accommodation.getName() + " in " + accommodation.getCity());
-            accommodation.getRooms().forEach(room -> {
-                System.out.println("  Room ID: " + room.getId() + ", Type: " + room.getType().getName());
-            });
-        });
-
-
-        // Configurar disponibilidad de habitaciones
-        LocalDate date1 = LocalDate.of(2024, 12, 24);
-        LocalDate date2 = LocalDate.of(2024, 12, 25);
-
+    public static void main(String[] args) {
         // Crear controlador y vista
-        AccommodationController accommodationController = new AccommodationController(accommodations);
-        BookingController bookingController = new BookingController(accommodations);
-        GeneralView generalView = new GeneralView(accommodationController,bookingController);
+        AccommodationController accommodationController = new AccommodationController();
+        BookingController bookingController = new BookingController();
+        GeneralView generalView = new GeneralView(accommodationController, bookingController);
 
-        // Ejecutar la comprobación de disponibilidad
-        generalView.searchAndShowAccommodations();
-        accommodations = generalView.makeReservation(accommodations);
-        accommodations = generalView.updateReservation(accommodations);
+        // Bucle de menú de opciones
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Buscar alojamientos");
+            System.out.println("2. Realizar una reserva");
+            System.out.println("3. Actualizar una reserva");
+            System.out.println("4. Salir");
+            int option = scanner.nextInt();
+            scanner.nextLine(); // Consumir la nueva línea
+
+            switch (option) {
+                case 1:
+                    accommodations = generalView.searchAndShowAccommodations(accommodations);
+                    break;
+                case 2:
+                    accommodations = generalView.makeReservation(accommodations);
+                    break;
+                case 3:
+                    accommodations = generalView.updateReservation(accommodations);
+                    break;
+                case 4:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+            }
+        }
+
+        System.out.println("Gracias por usar el sistema de reservas. ¡Hasta luego!");
     }
 }

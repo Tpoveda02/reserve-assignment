@@ -9,6 +9,7 @@ import org.example.model.Room;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class GeneralView {
         this.bookingController = bookingController;
     }
 
-    public void searchAndShowAccommodations() {
+    public List<Accommodation> searchAndShowAccommodations(List<Accommodation> accommodations) {
         Scanner scanner = new Scanner(System.in);
 
         // Solicitar los parámetros al usuario
@@ -52,27 +53,13 @@ public class GeneralView {
         adults = 5;
         children = 1;
         numRooms = 2;
+        List<Accommodation> originalAccommodations = List.copyOf(accommodations);
 
         // Realizar la búsqueda a través del controlador
-        List<Accommodation> foundAccommodations = accommodationController.searchAccommodations(city, accommodationType, startDate, endDate, adults, children, numRooms);
-        // Mostrar los resultados
-        showAccommodations(foundAccommodations, startDate, endDate);
-    }
-
-    public void showAccommodations(List<Accommodation> accommodations, LocalDate startDate, LocalDate endDate) {
         System.out.println("Alojamientos Disponibles:");
-        for (Accommodation accommodation : accommodations) {
-            System.out.println("Identificador: " + accommodation.getId());
-            System.out.println("Nombre: " + accommodation.getName());
-            System.out.println("Ciudad: " + accommodation.getCity());
-            System.out.println("Calificación: " + accommodation.getRating());
-            System.out.println("Precio total: " + accommodation.getPriceTotal());
-            System.out.println("Precio Descontado/Adicional : " + (accommodation.getPriceTotal() - accommodation.getPricePartial()));
-            System.out.println("Porcentaje Descontado/Adicional: " + accommodation.getDiscount());
-            System.out.println("Habitaciones: ");
-            showRooms(accommodation.getRooms());
-            System.out.println("----------------------------");
-        }
+        accommodationController.searchAccommodations(originalAccommodations, city, accommodationType, startDate, endDate, adults, children, numRooms);
+        // Mostrar los resultados
+        return accommodations;
     }
 
     public List<Accommodation> makeReservation(List<Accommodation> accommodations) {
@@ -101,22 +88,22 @@ public class GeneralView {
         LocalDate endDate = LocalDate.parse(scanner.nextLine());
            */
         String firstName = "Taniah";
-        String lastName = "Taniah";
-        String email = "Taniah";
-        String nationality = "Taniah";
-        String phoneNumber = "Taniah";
-        String arrivalTime = "Taniah";
+        String lastName = "Poveda";
+        String email = "taniah@gmail.com";
+        String nationality = "Colombiana";
+        String phoneNumber = "3007029830";
+        String arrivalTime = "13:00";
         LocalDate birthdate = LocalDate.parse("2002-04-22");
         LocalDate startDate = LocalDate.parse("2025-04-15");
         LocalDate endDate = LocalDate.parse("2025-04-26");
         Accommodation accommodation = accommodationController.findAccommodation("A5", accommodations);
         // Realizar la reserva a través del controlador
-        System.out.println(endDate);
         try {
             Accommodation updateAccommodation = bookingController.book("1BOK", firstName, lastName, email, nationality, phoneNumber,
                     birthdate, arrivalTime, accommodation, startDate, endDate, adults + children, numRooms);
-            return accommodationController.updateAccommodation(updateAccommodation,accommodations);
-        }catch (Exception e){
+            System.out.println("Se realizo la reserva con éxito");
+            return accommodationController.updateAccommodation(updateAccommodation, accommodations);
+        } catch (Exception e) {
             System.out.println("No se pudo realizar la reserva");
             return accommodations;
         }
@@ -129,11 +116,11 @@ public class GeneralView {
         System.out.println("Ingrese su fecha de nacimiento (yyyy-mm-dd):");
         LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine());
         Booking booking = bookingController.updateBooking(email, dateOfBirth, accommodations);
-        if(booking != null){
-            Accommodation updateAccommodation = accommodationController.findAccommodation(booking.getAccommodation().getId(),accommodations);
+        if (booking != null) {
+            Accommodation updateAccommodation = accommodationController.findAccommodation(booking.getAccommodation().getId(), accommodations);
             return updateBookingDetails(updateAccommodation, booking, accommodations);
 
-        }else{
+        } else {
             System.out.println("No se encontro ninguna reserva, verifique los datos ingresados");
         }
         return accommodations;
@@ -155,25 +142,23 @@ public class GeneralView {
         System.out.println("1. Cambiar habitación");
         System.out.println("2. Cambiar alojamiento");
 
-        try {
-            int option = scanner.nextInt();
-            if (option == 1) {
-                // Cambiar de habitación
-                return updateBookingDetails(changeRoom(accommodation, booking), booking, accommodations);
-            } else if (option == 2) {
-                // Cambiar de alojamiento
-                accommodation.getBookings().remove(booking);
-                // Eliminar la reserva actual
-                System.out.println("Reserva eliminada. Proceda a crear una nueva reserva.");
-                return updateBookingDetails(accommodation, booking, accommodations);
-            } else {
-                System.out.println("Opción no válida");
-            }
-        }catch (Exception e){
-            System.out.println("No se pudo realizar la actualización de la reserva");
+        int option = scanner.nextInt();
+        if (option == 1) {
+            // Cambiar de habitación
+            return accommodationController.updateAccommodation(changeRoom(accommodation, booking),accommodations);
+        } else if (option == 2) {
+            // Cambiar de alojamiento
+            accommodation.getBookings().remove(booking);
+            // Eliminar la reserva actual
+            System.out.println("Reserva eliminada. Proceda a crear una nueva reserva.");
+            return accommodationController.updateAccommodation(accommodation, accommodations);
+        } else {
+            System.out.println("Opción no válida");
         }
+
         return accommodations;
     }
+
     private Accommodation changeRoom(Accommodation accommodation, Booking booking) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Habitaciones ya reservadas: ");
@@ -182,30 +167,36 @@ public class GeneralView {
         System.out.println("Ingrese el id de la habitacion que quiere cambiar: ");
         String idRoom = scanner.nextLine();
         Room room = bookingController.seletedRoom(idRoom, booking.getAccommodation().getRooms());
-        List<Room> roomsAvailables = accommodationController.findAvailableRoomsByAccommodation(
-                accommodation, booking.getStartDate(), booking.getEndDate(),
-                booking.getNumPersonsEntered() - room.getType().getPeopleByCountBeds(), 0, numRooms).getRooms();
+        List<Room> roomsAvailables = new ArrayList<Room>();
         System.out.println("Habitaciones disponibles:");
-        showRooms(roomsAvailables);
+        accommodationController.showAvailableRoomsByAccommodation(accommodation, booking.getStartDate(), booking.getEndDate(), booking.getNumPersonsEntered() - room.getType().getPeopleByCountBeds(), 0, numRooms);
+        for (Room room12 : accommodation.getRooms()) {
+            System.out.println("  Identificador: " + room12.getId());
+            System.out.println("  Tipo: " + room12.getType().getName());
+            System.out.println("  Precio base: " + room12.getType().getPrice());
+            System.out.println("  Características: " + room12.getType().getFeatures());
+            System.out.println("  Disponibilidad: " + room12.getAvailability());
+        }
         System.out.println("----------------------------");
         System.out.println("Ingrese el id de la nueva habitacion: ");
         String idNewRoom = scanner.nextLine();
         Room newRoom = bookingController.seletedRoom(idNewRoom, accommodation.getRooms());
         booking.getAccommodation().removeRoomById(room.getId());
         booking.getAccommodation().getRooms().add(newRoom);
-        accommodation.updateBooking(booking,accommodation.getBookings());
+        accommodation.updateBooking(booking, accommodation.getBookings());
         System.out.println("----------------------------");
         System.out.println("Reserva actualizada");
         return accommodation;
     }
 
-    private void showRooms (List < Room > rooms) {
-            for (Room room : rooms) {
-                System.out.println("  Identificador: " + room.getId());
-                System.out.println("  Tipo: " + room.getType().getName());
-                System.out.println("  Precio por noche: " + room.getType().getPrice());
-                System.out.println("  Características: " + room.getType().getFeatures());
-            }
+    public void showRooms(List<Room> rooms) {
+        for (Room room : rooms) {
+            System.out.println("  Identificador: " + room.getId());
+            System.out.println("  Tipo: " + room.getType().getName());
+            System.out.println("  Precio por noche: " + room.getType().getPrice());
+            System.out.println("  Características: " + room.getType().getFeatures());
+            System.out.println("  Disponibilidad: " + room.getAvailability());
         }
-
     }
+
+}

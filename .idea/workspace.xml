@@ -5,11 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61f02d6a-a87c-4de7-a087-98af660f761a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/2/523e9472816c925dc6dbe3df358e305cac07a7c5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/d/9d14ee30d55edf252a4258a69c65d94e673359d3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/3/b37f0e269280984cc77cc539fe862316a7864db5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fbc81ac0acf5de322b3345cef14c8e05d3d89338" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/2/523e9472816c925dc6dbe3df358e305cac07a7c5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/d/9d14ee30d55edf252a4258a69c65d94e673359d3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/3/b37f0e269280984cc77cc539fe862316a7864db5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/b/fbc81ac0acf5de322b3345cef14c8e05d3d89338" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/AccommodationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/AccommodationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Accommodation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Accommodation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/GeneralView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/GeneralView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controller/BookingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controller/BookingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/Accommodation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/Accommodation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/model/Booking.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/model/Booking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/view/GeneralView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/view/GeneralView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,15 +95,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/model/Booking.java</url>
-          <line>24</line>
-          <properties class="org.example.model.Booking" method="generateBook">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="9" />
