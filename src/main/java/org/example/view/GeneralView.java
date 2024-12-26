@@ -1,7 +1,9 @@
 package org.example.view;
 
 import org.example.controller.AccommodationController;
+import org.example.controller.BookingController;
 import org.example.model.Accommodation;
+import org.example.model.Booking;
 import org.example.model.Room;
 
 import java.time.LocalDate;
@@ -11,6 +13,7 @@ import java.util.Scanner;
 public class GeneralView {
 
     private AccommodationController accommodationController;
+    private BookingController bookingController;
 
     public GeneralView(AccommodationController accommodationController) {
         this.accommodationController = accommodationController;
@@ -65,6 +68,7 @@ public class GeneralView {
             System.out.println("----------------------------");
         }
     }
+
 
 
 }

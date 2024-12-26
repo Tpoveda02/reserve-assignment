@@ -20,5 +20,4 @@ public class Client {
     private String phoneNumber;
     private LocalTime birthdate;
 
-
 }

@@ -6,21 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reservation {
+public class Booking {
+    private String id;
     private Client client;
-    private Accommodation accommodation;
+    private String arrivalTime;
+    private String hotelId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private int adults;
-    private int children;
-    private int numberOfRooms;
-    private List<Room> roomsReserved;
-    private double totalPrice;
-    private double discountOrIncrease;
 
 }
