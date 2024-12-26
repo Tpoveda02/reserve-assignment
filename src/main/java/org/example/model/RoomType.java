@@ -11,7 +11,9 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomType {
+    private String id;
     private String name;
     private Map<String, Boolean> features;
     private int price;
+    private int peopleByCountBeds;
 }
