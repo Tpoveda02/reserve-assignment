@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +14,25 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public abstract class Accommodation {
     private String id;
     private String name;
     private String city;
     private double rating;
-    private double pricePerNight;
+    private double pricePartial;
+    private double priceTotal;
+    private double discount;
     private List<Room> rooms;
 
-    public abstract double calculateTotalPrice(LocalDate startDate, LocalDate endDate, List<Room> rooms);
+    // Método para calcular el precio total
+    public double calculateTotalPrice(List<Room> rooms, LocalDate startDate, LocalDate endDate) {
+        return 0;
+    }
+
     public abstract List<Room> checkAvailableRooms(List<Room> availableRoomsByDate, int adults, int children, int rooms);
+
+
     public List<Room> findRoomsByDates(List<Room> availableRooms, LocalDate startDate, LocalDate endDate) {
         List<Room> tempAvailableRooms = new ArrayList<>();
         for (Room room : availableRooms) {
@@ -33,7 +43,6 @@ public abstract class Accommodation {
         availableRooms.addAll(tempAvailableRooms);
         return availableRooms;
     }
-
 
     public Room checkSingleRoomCapacity(List<Room> availableRooms, int totalPeople) {
         for (Room room : availableRooms) {

@@ -13,13 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class DayPass extends Accommodation{
     //Constructor
-    public DayPass(String id, String name, String city, double rating, double pricePerNight, List<Room> rooms) {
-        super(id, name, city, rating, pricePerNight, rooms);
-    }
-
-    @Override
-    public double calculateTotalPrice(LocalDate startDate, LocalDate endDate, List<Room> rooms) {
-        return 0;
+    public DayPass(String id, String name, String city, double rating, double pricePartial, double priceTotal, double discount, List<Room> rooms) {
+        super(id, name, city, rating, pricePartial, priceTotal, discount, rooms);
     }
 
     @Override

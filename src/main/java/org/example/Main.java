@@ -49,11 +49,11 @@ public class Main {
 
         // Creación de hoteles
         List<Accommodation> accommodations = new ArrayList<>();
-        accommodations.add(new Hotel("A1", "Hotel Caribe", "Cartagena", 4.5, 300.0, rooms1));
-        accommodations.add(new Hotel("A2", "Hotel Andino", "Bogotá", 4.0, 250.0, rooms2));
-        accommodations.add(new Hotel("A3", "Hotel Pacífico", "Buenaventura", 4.2, 280.0, rooms3));
-        accommodations.add(new Hotel("A4", "Hotel Nevado", "Manizales", 3.8, 230.0, rooms4));
-        accommodations.add(new Hotel("A5", "Hotel Llanero", "Villavicencio", 4.3, 290.0, rooms5));
+        accommodations.add(new Hotel("A1", "Hotel Caribe", "Cartagena", 4.5, 300.0,0,0, rooms1));
+        accommodations.add(new Hotel("A2", "Hotel Andino", "Bogotá", 4.0, 250.0,0,0, rooms2));
+        accommodations.add(new Hotel("A3", "Hotel Pacífico", "Buenaventura", 4.2, 280.0,0,0, rooms3));
+        accommodations.add(new Hotel("A4", "Hotel Nevado", "Manizales", 3.8, 230.0,0,0, rooms4));
+        accommodations.add(new Hotel("A5", "Hotel Llanero", "Villavicencio", 4.3, 290.0,0,0, rooms5));
 
         // Impresión para verificar
         accommodations.forEach(accommodation -> {

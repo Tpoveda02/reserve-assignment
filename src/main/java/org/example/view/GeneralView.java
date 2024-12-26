@@ -53,12 +53,13 @@ public class GeneralView {
             System.out.println("Nombre: " + accommodation.getName());
             System.out.println("Ciudad: " + accommodation.getCity());
             System.out.println("Calificación: " + accommodation.getRating());
-            System.out.println("Precio por Noche: " + accommodation.getPricePerNight());
-            System.out.println("Precio Calculado: " + accommodation.calculateTotalPrice(startDate, endDate, accommodation.getRooms()));
+            System.out.println("Precio total: " + accommodation.getPriceTotal());
+            System.out.println("Precio Descontado/Adicional : " + (accommodation.getPriceTotal() - accommodation.getPricePartial()));
+            System.out.println("Porcentaje Descontado/Adicional: " + accommodation.getDiscount());
             System.out.println("Habitaciones: ");
             for (Room room : accommodation.getRooms()) {
                 System.out.println("  Tipo: " + room.getType().getName());
-                System.out.println("  Precio: " + room.getType().getPrice());
+                System.out.println("  Precio por noche: " + room.getType().getPrice());
                 System.out.println("  Características: " + room.getType().getFeatures());
             }
             System.out.println("----------------------------");

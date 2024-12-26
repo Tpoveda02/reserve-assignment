@@ -26,14 +26,20 @@ public class AccommodationController {
         List<Accommodation> resultsAccomodations = new ArrayList<>();
         for (Accommodation accommodation : accommodations) {
             if (accommodation.getCity().equalsIgnoreCase(city) && accommodation.getClass().getSimpleName().equalsIgnoreCase(accommodationType)) {
-                List<Room> availableRoomsByAccomodation = accommodation.checkAvailableRooms(
-                        accommodation.findRoomsByDates(accommodation.getRooms(), startDate, endDate), adults, children, rooms);
-                if (!availableRoomsByAccomodation.isEmpty()) {
-                    accommodation.setRooms(availableRoomsByAccomodation);
+                // Encuentra las habitaciones disponibles en las fechas dadas
+                List<Room> availableRoomsByAccomodation = accommodation.findRoomsByDates(accommodation.getRooms(), startDate, endDate);
+
+                // Verifica si las habitaciones encontradas cumplen con los requisitos de capacidad
+                List<Room> roomsByCapacity = accommodation.checkAvailableRooms(availableRoomsByAccomodation, adults, children, rooms);
+
+                if (!roomsByCapacity.isEmpty()) {
+                    accommodation.setRooms(roomsByCapacity);
+                    accommodation.calculateTotalPrice(accommodation.getRooms(), startDate, endDate);
                     resultsAccomodations.add(accommodation);
                 }
             }
         }
         return resultsAccomodations;
     }
+
 }
