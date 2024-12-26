@@ -24,6 +24,7 @@ public abstract class Accommodation {
     private double priceTotal;
     private double discount;
     private List<Room> rooms;
+    private List<Booking> bookings;
 
 
     public abstract List<Room> checkAvailableRooms(List<Room> availableRoomsByDate, int adults, int children, int rooms);
@@ -86,6 +87,5 @@ public abstract class Accommodation {
         }
     }
 
-    public void addBooking(Booking newBooking) {
-    }
+    public void addBooking(Booking booking) { this.bookings.add(booking); }
 }
